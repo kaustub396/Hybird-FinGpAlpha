@@ -43,8 +43,8 @@ From `gp/integrated_main_results.csv`:
 
 | Strategy | Ann Return (Net) | Sharpe (Net) | Rank IC Mean | Max Drawdown |
 |---|---:|---:|---:|---:|
-| Regime-GP Ensemble + HMM (Exp) | **8.41%** | **0.5518** | **0.0346** | -19.62% |
-| Regime-GP Ensemble (Ours) | 7.68% | 0.5593 | 0.0386 | -24.40% |
+| Regime-GP Ensemble + HMM (Final) | **8.41%** | **0.5518** | **0.0346** | -19.62% |
+| Regime-GP Ensemble | 7.68% | 0.5593 | 0.0386 | -24.40% |
 | HMM Regime-GP Alpha | 7.49% | 0.5244 | 0.0303 | **-18.17%** |
 | Mean Reversion | 4.46% | 0.2981 | 0.0221 | -20.19% |
 | Momentum (12-1M) | -2.57% | -0.1369 | 0.0059 | -40.65% |
