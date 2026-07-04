@@ -37,25 +37,25 @@ Evaluating the strategies under long-only constraints with **25 bps transaction 
 
 ## 📂 Repository Structure
 
-This repository now contains both the clean code and the official LaTeX publication drafts:
+The repository is organized as follows:
 ```text
 Hybird-FinGpAlpha/
-|- draft_v1.tex                 # Clean IEEE Access LaTeX draft
-|- draft_v2.tex                 # LaTeX draft with highlighted revisions (red text)
-|- draft_v1.pdf                 # Cleancompiled paper PDF
-|- draft_v2.pdf                 # Highlighted compiled paper PDF
-|- Response_to_Reviewers.docx   # Detailed point-by-point response document
 |- README.md                    # Updated project overview (this file)
 |- README_v1.md                 # Original project overview (unconditional/old baseline)
-|- ablation_study.py            # HMM and feature ablation runner
-|- gp_engine.py                 # Core GP discovery engine (DEAP wrapper)
-|- regime_detector.py           # HMM regime classification script
-|- run_long_only.py             # Backtester with long-only constraints & 25bps costs
-|- run_statistical_tests.py     # Permutation tests, DSR, and paired t-tests
-|- run_experiment_sp500.py      # US market validation run
-|- run_experiment_china.py      # Chinese market validation run
-|- figures/                     # Performance charts, drawdown plots, and statistical plots
-|- data/                        # Processed panels, return logs, and metrics CSVs
+|- .gitignore                   # Excludes compiler/cache temp files
+|- code/                        # Main code repository
+|  |- regime_gp.py              # Regime-GP strategy logic
+|  |- gp_engine.py              # Genetic Programming formula search engine
+|  |- regime_detector.py        # HMM regime detector
+|  |- run_long_only.py          # Backtester with long-only constraints & 25bps costs
+|  |- run_statistical_tests.py  # Permutation test, DSR, and t-test script
+|  |- run_all_reviewer_experiments.py # Master experimental runner
+|  |- gp/                       # GP implementation module
+|  |- afm/                      # AFM fundamental signal processing
+|  |- integration/              # Merging panels and signals
+|  |- comparison/               # Strategy performance comparison module
+|- data/                        # Clean dataset CSVs and PKL data panels
+|- figures/                     # Compiled performance charts, drawdowns, and significance plots
 ```
 
 ---
