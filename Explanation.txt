@@ -1,0 +1,22 @@
+📁 C:\Users\EV-Car\Main_Project_2\
+File	Purpose
+download_data.py	Downloads 51 stock CSVs via yfinance/jugaad_data
+standardize_data.py	Standardizes all raw CSVs to same format
+build_features.py	Creates 32 OHLC features + cross-sectional panel
+check_data.py	Data validation utility
+baselines.py	6 baseline strategies (Momentum, Mean Rev, etc.)
+evaluation.py	AlphaEvaluator — IC, Sharpe, portfolio metrics
+regime_detector.py	HMM regime detection (Bull/Bear)
+gp_engine.py	Core GP engine (ICIR fitness, DEAP)
+regime_gp.py	3-regime system (v1, superseded)
+run_experiment.py	2-regime system (v2, superseded)
+experiments.py	Old rolling validation (superseded)
+final_experiments.py	Final experiments A, B, C (latest)
+results_explanation.md	✨ NEW — the explanation you asked for
+📁 C:\Users\EV-Car\Main_Project_2\data\
+Path	Purpose
+data\raw\	51 original stock CSVs
+data\processed\	Standardized CSVs + features\ + panel.pkl
+data\final_results.pkl	All experiment results (saved)
+data\baseline_results.csv	Baseline comparison table
+data\regime_detector.pkl	Saved HMM model

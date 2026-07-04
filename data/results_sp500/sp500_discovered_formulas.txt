@@ -1,0 +1,17 @@
+S&P 500 -- Discovered Formulas by Regime
+=================================================================
+
+Bear Regime:
+  #1 (fitness=0.7352): div(mul(max(range_pct, max(sq(add(div(sub(drawdown_250d, range_pct), sq(add(drawdown_250d, log(max(sqrt(log(max(sma_200, log(min(ret_5d, ret_60d))))), sqrt(vol_120d)))))), ret_250d)), range_pct)), mul(inv(sma_20), add(max(inv(vol_120d), sma_200), vol_120d))), max(sqrt(log(vol_20d)), zscore_20))
+  #2 (fitness=0.7342): div(mul(max(-0.17, max(sq(add(div(sub(drawdown_250d, range_pct), sq(add(drawdown_250d, log(max(sqrt(add(drawdown_250d, log(max(sma_200, vol_20d)))), sqrt(vol_120d)))))), ret_250d)), range_pct)), mul(inv(sma_20), add(max(inv(vol_120d), sma_200), vol_120d))), max(sqrt(log(vol_20d)), zscore_20))
+  #3 (fitness=0.7341): div(mul(max(range_pct, max(sq(add(div(sub(drawdown_250d, range_pct), sq(add(drawdown_250d, log(max(sqrt(add(drawdown_250d, log(max(sma_200, log(ret_250d))))), sqrt(vol_120d)))))), ret_250d)), range_pct)), mul(inv(sma_20), add(max(inv(vol_120d), sma_200), vol_120d))), max(sqrt(log(vol_20d)), zscore_20))
+
+Bull Regime:
+  #1 (fitness=0.5439): min(mul(sq(sq(sma_50)), min(sq(sma_50), inv(ret_250d))), min(vol_120d, min(inv(sma_20), min(inv(neg(drawdown_60d)), max(sign(price_to_sma200), sub(price_to_sma50, zscore_60))))))
+  #2 (fitness=0.5425): min(mul(sq(sma_50), min(vol_120d, inv(ret_250d))), min(vol_120d, min(inv(sma_20), min(inv(neg(drawdown_60d)), max(sign(price_to_sma200), sub(inv(sma_20), zscore_60))))))
+  #3 (fitness=0.5419): min(mul(sq(sma_50), mul(sma_20, min(sq(sq(sma_50)), inv(min(ret_250d, neg(log(drawdown_60d))))))), min(vol_120d, min(inv(sma_20), min(inv(ret_250d), max(sign(price_to_sma200), sub(price_to_sma50, zscore_60))))))
+
+Vanilla GP (no regime):
+  #1 (fitness=0.4511): div(hl_ratio, mul(mul(rsi_14, mul(sma_20, vol_ratio_5_20)), sq(mul(sma_20, mul(sq(mul(sma_20, vol_ratio_5_20)), sq(sma_20))))))
+  #2 (fitness=0.4511): div(hl_ratio, mul(mul(rsi_14, mul(sma_20, vol_ratio_5_20)), sq(mul(sma_20, mul(sq(vol_ratio_5_20), sq(mul(sma_20, sma_20)))))))
+  #3 (fitness=0.4511): div(hl_ratio, mul(mul(rsi_14, mul(sma_20, vol_ratio_5_20)), sq(mul(sma_20, mul(sq(sma_20), sq(mul(sma_20, vol_ratio_5_20)))))))

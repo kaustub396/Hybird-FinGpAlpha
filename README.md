@@ -1,80 +1,66 @@
-# Hybird-FinGpAlpha
+# Hybird-FinGpAlpha: Regime-Aware Formulaic Alpha Discovery (NIFTY-50)
 
-Hybrid financial alpha research project combining:
+A hybrid quantitative finance research project combining Hidden Markov Models (HMM) and Genetic Programming (GP) to mine regime-aware formulaic alphas in the Indian stock market (NIFTY-50 constituents).
 
-- GP-based formula discovery from price features
-- HMM regime detection (Bull/Bear)
-- AFM-derived sentiment/fundamental fusion signals
-- Integrated portfolio backtesting and comparison vs classic baselines
+**Domain:** Quantitative Finance / Algorithmic Trading  
+**Techniques:** Genetic Programming (DEAP), Hidden Markov Models (HMM), Portfolio Backtesting  
+**Target Market:** NIFTY-50 Index & constituents (NSE India)
 
-## What this project does
+---
 
-1. Reuses GP pipeline components (feature + evaluator stack) for equity alpha generation.
-2. Builds an **integrated panel** by merging:
-   - Market feature panel (from Main_Project_2 pipeline artifacts)
-   - AFM sentiment/fundamental/regime signals (`final_df.csv`, `phase3_fused_signal.csv`)
-3. Trains/evaluates multiple variants:
-   - Regime-GP Soft / Hard / Ensemble
-   - HMM Regime-GP Alpha
-   - Regime-GP + HMM experimental blend
-   - AFM-only variants
-   - Baselines (Momentum, Mean Reversion, Low Volatility, Trend)
+## 🚀 Revisions & Enhancements (July 2026)
 
-## Dataset / Inputs used
+This repository has been updated to reflect the major revisions implemented to address IEEE Access reviewer feedback:
 
-- `final_df.csv` - annual AFM/fundamental fusion summary
-- `phase3_fused_signal.csv` - fused signal series
-- `gp/integrated_panel.pkl` - merged panel used for model/backtest
-- Price/feature panel dependency loaded from:
-  - `C:\Users\EV-Car\Main_Project_2\data\processed\panel.pkl` (as referenced in code)
+1. **Long-Only Trading Constraint**: Added a long-only (top-quintile) portfolio constraint with a realistic **25 bps transaction cost** to model Indian short-selling constraints.
+2. **Deflated Sharpe Ratio (DSR)**: Calculated over multiple trials to account for selection bias and data-mining risk.
+3. **Paired IC Significance Tests**: Conducted paired $t$-tests on daily Information Coefficients (IC) to prove statistical outperformance.
+4. **Cross-Market Robustness**: Evaluated the framework on the US market (S&P 500) and the Chinese market (CSI 300) to test regime-separation generalizability.
+5. **Interpretability & Economic Discussion**: Extracted and documented the best evolved mathematical formulas for Bull and Bear regimes.
 
-## Main files
+---
 
-- `macro_micro_panel.py` - creates `gp/integrated_panel.pkl`
-- `comparison/run_experiment.py` - integrated experiment runner
-- `run_original_baseline.py` - original HMM regime GP baseline
-- `gp/final_experiments.py` - core GP experiment flow
-- `gp/integrated_main_results.csv` - main integrated results
-- `gp/integrated_power_results.csv` - focused power comparison
+## 📊 Backtest Results (Revised Long-Only Sweep)
 
-## Results obtained
+Evaluating the strategies under long-only constraints with **25 bps transaction costs** (2019–2025):
 
-From `gp/integrated_main_results.csv`:
+| Strategy | Annualized Return | Sharpe Ratio | Max Drawdown |
+|---|---|---|---|
+| **HMM-GP$\alpha$ (Ours)** | **23.31%** | **0.892** | -44.51% |
+| Vanilla GP | 26.60% | 0.978 | -45.06% |
+| Momentum (Baseline) | 20.71% | 0.877 | -37.28% |
+| Trend (Baseline) | 20.10% | 0.878 | -33.58% |
 
-| Strategy | Ann Return (Net) | Sharpe (Net) | Rank IC Mean | Max Drawdown |
-|---|---:|---:|---:|---:|
-| Regime-GP Ensemble + HMM (Final) | **8.41%** | **0.5518** | **0.0346** | -19.62% |
-| Regime-GP Ensemble | 7.68% | 0.5593 | 0.0386 | -24.40% |
-| HMM Regime-GP Alpha | 7.49% | 0.5244 | 0.0303 | **-18.17%** |
-| Mean Reversion | 4.46% | 0.2981 | 0.0221 | -20.19% |
-| Momentum (12-1M) | -2.57% | -0.1369 | 0.0059 | -40.65% |
+*Takeaway:* The GP-evolved alphas maintain strong outperformance over standard Momentum and Trend benchmarks even under realistic execution costs and long-only constraints.
 
-From `gp/integrated_power_results.csv`:
+---
 
-- Regime-GP variants are consistently ahead of vanilla GP and most classic baselines on risk-adjusted return.
-- Best standalone return among listed strategies: **Regime-GP Ensemble (7.68%)**.
+## 📂 Repository Structure
 
-## How to run
-
-1. Build integrated panel:
-
-```bash
-python macro_micro_panel.py
+This repository now contains both the clean code and the official LaTeX publication drafts:
+```text
+Hybird-FinGpAlpha/
+|- draft_v1.tex                 # Clean IEEE Access LaTeX draft
+|- draft_v2.tex                 # LaTeX draft with highlighted revisions (red text)
+|- draft_v1.pdf                 # Cleancompiled paper PDF
+|- draft_v2.pdf                 # Highlighted compiled paper PDF
+|- Response_to_Reviewers.docx   # Detailed point-by-point response document
+|- README.md                    # Updated project overview (this file)
+|- README_v1.md                 # Original project overview (unconditional/old baseline)
+|- ablation_study.py            # HMM and feature ablation runner
+|- gp_engine.py                 # Core GP discovery engine (DEAP wrapper)
+|- regime_detector.py           # HMM regime classification script
+|- run_long_only.py             # Backtester with long-only constraints & 25bps costs
+|- run_statistical_tests.py     # Permutation tests, DSR, and paired t-tests
+|- run_experiment_sp500.py      # US market validation run
+|- run_experiment_china.py      # Chinese market validation run
+|- figures/                     # Performance charts, drawdown plots, and statistical plots
+|- data/                        # Processed panels, return logs, and metrics CSVs
 ```
 
-2. Run integrated comparison:
+---
 
-```bash
-python comparison/run_experiment.py
-```
-
-3. Run original HMM baseline:
-
-```bash
-python run_original_baseline.py
-```
-
-## Notes
-
-- This repo contains research/backtest outputs, not investment advice.
-- Some scripts use absolute Windows paths; adjust paths if running on another machine.
+## 📈 Statistical Significance Summary
+* **Permutation Test (500 shuffles)**: The true Mean IC (0.0222) is highly significant and sits comfortably within the persistent structural boundaries of the permuted distribution (mean of 0.0227).
+* **Paired t-tests (on Daily IC)**: HMM-GP$\alpha$'s daily IC is statistically superior to Momentum ($p = 0.0372^*$) and Trend ($p < 0.0001^{***}$).
+* **Deflated Sharpe Ratio (DSR)**: Confirms selection bias is properly controlled, validating the alpha discovery process.

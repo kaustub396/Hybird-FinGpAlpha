@@ -1,0 +1,17 @@
+Chinese A-Shares -- Discovered Formulas by Regime
+=================================================================
+
+Bear Regime:
+  #1 (fitness=0.6799): min(log(abs(zscore_60)), sqrt(max(add(sub(add(add(sub(neg(mul(mul(0.61, ret_250d), ret_250d)), ret_120d), max(ret_250d, neg(abs(hl_ratio)))), div(0.61, sma_200)), ret_120d), max(ret_250d, sign(drawdown_60d))), sq(add(drawdown_60d, div(0.61, sma_200))))))
+  #2 (fitness=0.6696): min(log(abs(zscore_60)), sqrt(max(add(sub(add(add(sub(neg(mul(ret_120d, ret_250d)), ret_120d), max(ret_250d, neg(neg(mul(price_to_sma50, drawdown_60d))))), div(0.61, sma_200)), ret_120d), max(ret_250d, sign(sign(drawdown_60d)))), sq(add(drawdown_60d, div(0.61, sma_200))))))
+  #3 (fitness=0.6669): min(log(abs(zscore_60)), sqrt(max(add(sub(add(add(sub(neg(mul(price_to_sma50, ret_250d)), ret_120d), max(ret_250d, ret_1d)), div(0.61, sma_200)), ret_120d), max(ret_250d, ret_250d)), sq(add(drawdown_60d, div(0.61, sma_200))))))
+
+Bull Regime:
+  #1 (fitness=0.6903): sqrt(sub(neg(abs(sub(sqrt(sub(price_to_sma200, vol_5d)), sub(vol_5d, sub(neg(abs(neg(abs(sub(sqrt(price_to_sma200), sub(sub(sub(price_to_sma200, vol_5d), range_pct), range_pct)))))), ret_20d))))), add(min(sma_20, ret_20d), sub(price_to_sma200, sign(drawdown_250d)))))
+  #2 (fitness=0.6883): sqrt(sub(neg(abs(sub(sqrt(sub(price_to_sma200, vol_5d)), sub(vol_5d, sub(neg(abs(neg(abs(sub(sqrt(price_to_sma200), sub(sub(sub(price_to_sma200, vol_5d), range_pct), range_pct)))))), ret_20d))))), add(min(sma_20, ret_20d), sub(price_to_sma200, sign(min(ret_20d, drawdown_250d))))))
+  #3 (fitness=0.6883): sqrt(sub(neg(abs(sub(sqrt(sub(price_to_sma200, vol_5d)), sub(vol_5d, sub(neg(abs(neg(abs(sub(sqrt(price_to_sma200), sub(sub(sub(price_to_sma200, vol_5d), range_pct), range_pct)))))), ret_20d))))), add(min(sma_20, ret_20d), sub(price_to_sma200, sign(min(vol_5d, drawdown_250d))))))
+
+Vanilla GP (no regime):
+  #1 (fitness=0.5876): log(sqrt(neg(add(max(abs(sign(price_to_sma50)), vol_60d), sqrt(add(sub(add(add(price_to_sma50, drawdown_60d), add(price_to_sma50, add(sub(sub(add(min(price_to_sma50, ret_5d), ret_20d), sqrt(drawdown_60d)), price_to_sma50), sub(add(price_to_sma50, min(min(add(ret_60d, ret_20d), ret_5d), hl_ratio)), sqrt(drawdown_60d))))), sqrt(price_to_sma50)), price_to_sma50))))))
+  #2 (fitness=0.5869): log(sqrt(neg(add(log(min(min(price_to_sma50, price_to_sma50), ret_1d)), sqrt(add(sub(add(add(price_to_sma50, drawdown_60d), add(price_to_sma50, add(sub(sub(add(min(price_to_sma50, ret_5d), ret_20d), sqrt(drawdown_60d)), price_to_sma50), sub(add(price_to_sma50, min(min(add(ret_60d, ret_20d), ret_5d), hl_ratio)), sqrt(drawdown_60d))))), sqrt(price_to_sma50)), price_to_sma50))))))
+  #3 (fitness=0.5869): log(neg(add(price_to_sma50, sqrt(add(sub(add(min(ret_60d, mul(ret_60d, ret_5d)), ret_20d), sqrt(drawdown_60d)), sub(add(add(price_to_sma50, price_to_sma50), min(price_to_sma50, ret_5d)), sqrt(price_to_sma50)))))))

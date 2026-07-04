@@ -1,0 +1,133 @@
+<mxfile host="app.diagrams.net" modified="2026-03-17T15:28:00.000Z" agent="5.0" version="24.0.0" type="device">
+  <diagram id="regime-alpha-arch" name="Architecture">
+    <mxGraphModel dx="0" dy="0" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="820" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- ===== TOP ROW: LIGHT BLUE CONTAINERS ===== -->
+
+        <mxCell id="c1" value="&lt;b style=&apos;font-size:18px&apos;&gt;INPUT DATA&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAEAF7;strokeColor=#000000;strokeWidth=2.5;verticalAlign=top;align=left;spacingLeft=14;spacingTop=10;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="15" y="15" width="260" height="340" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="b1" value="&lt;b style=&apos;font-size:14px&apos;&gt;NIFTY-50 INDEX&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&apos;font-size:13px&apos;&gt;• 5,834 trading days (2002–2025)&lt;br&gt;• Daily OHLC + Volume&lt;br&gt;• For regime detection&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#999999;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=10;spacingTop=8;fontSize=13;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="28" y="55" width="234" height="130" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="b2" value="&lt;b style=&apos;font-size:14px&apos;&gt;50 CONSTITUENT STOCKS&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&apos;font-size:13px&apos;&gt;• Individual stock OHLC&lt;br&gt;• Cross-sectional universe&lt;br&gt;• yfinance + jugaad_data&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#999999;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=10;spacingTop=8;fontSize=13;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="28" y="200" width="234" height="140" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="c2" value="&lt;b style=&apos;font-size:18px&apos;&gt;FEATURE ENGINEERING&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAEAF7;strokeColor=#000000;strokeWidth=2.5;verticalAlign=top;align=center;spacingTop=10;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="300" y="15" width="360" height="340" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="b3" value="&lt;b style=&apos;font-size:14px&apos;&gt;27 Stock Features&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&apos;font-size:13px&apos;&gt;• Returns (5d–250d)&lt;br&gt;• Volatility (5d, 20d, 120d)&lt;br&gt;• Trend (SMA, RSI)&lt;br&gt;• Z-scores, Drawdown&lt;br&gt;• ATR, H-L ratio&lt;br&gt;• Volume ratio&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#999999;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=10;spacingTop=8;fontSize=13;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="314" y="55" width="168" height="285" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="b4" value="&lt;b style=&apos;font-size:14px&apos;&gt;8 Index Features&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&apos;font-size:13px&apos;&gt;• Returns&lt;br&gt;• Volatility&lt;br&gt;• Drawdown&lt;br&gt;• SMA 50/200 ratios&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#999999;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=10;spacingTop=8;fontSize=13;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="494" y="55" width="152" height="140" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="b5" value="&lt;b style=&apos;font-size:14px&apos;&gt;Cross-Sectional Panel&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&apos;font-size:13px&apos;&gt;5,834 dates&lt;br&gt;× 50 stocks&lt;br&gt;× 27 features&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#999999;strokeWidth=1.5;verticalAlign=top;align=center;spacingTop=8;fontSize=13;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="494" y="210" width="152" height="130" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="c3" value="&lt;b style=&apos;font-size:18px&apos;&gt;REGIME DETECTION&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAEAF7;strokeColor=#000000;strokeWidth=2.5;verticalAlign=top;align=center;spacingTop=10;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="685" y="15" width="450" height="340" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="b6" value="&lt;b style=&apos;font-size:14px&apos;&gt;Hidden Markov Model (HMM)&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&apos;font-size:13px&apos;&gt;• Gaussian HMM on 8 index features&lt;br&gt;• BIC-based model selection → 2 regimes&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#999999;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=10;spacingTop=8;fontSize=13;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="700" y="55" width="420" height="85" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="b7" value="&lt;b style=&apos;font-size:15px;color:#2E7D32&apos;&gt;Bull Market&lt;/b&gt;&lt;br&gt;&lt;b style=&apos;font-size:13px&apos;&gt;(72.5% of days)&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&apos;font-size:13px&apos;&gt;• Low volatility (~15%)&lt;br&gt;• Persistence: 99.4%&lt;br&gt;• Calm, trending up&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=10;spacingTop=8;fontSize=13;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="700" y="155" width="205" height="185" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="b8" value="&lt;b style=&apos;font-size:15px;color:#C62828&apos;&gt;Bear Market&lt;/b&gt;&lt;br&gt;&lt;b style=&apos;font-size:13px&apos;&gt;(27.5% of days)&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&apos;font-size:13px&apos;&gt;• High volatility (~32%)&lt;br&gt;• Persistence: 98.3%&lt;br&gt;• Crashes, panic selling&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=10;spacingTop=8;fontSize=13;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="915" y="155" width="205" height="185" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== BOTTOM ROW: DARK NAVY CONTAINERS ===== -->
+
+        <mxCell id="c4" value="&lt;b style=&apos;font-size:18px;color:#FFFFFF&apos;&gt;GP ALPHA MINING ENGINE&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2B3A5C;strokeColor=#000000;strokeWidth=2.5;verticalAlign=top;align=left;spacingLeft=14;spacingTop=10;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="15" y="410" width="420" height="340" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="b9" value="&lt;b style=&apos;font-size:14px&apos;&gt;DEAP Genetic&lt;br&gt;Programming&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&apos;font-size:13px&apos;&gt;• Population: 500&lt;br&gt;• Generations: 50&lt;br&gt;• 13 operators&lt;br&gt;• Max depth: 6&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#999999;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=10;spacingTop=8;fontSize=13;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="28" y="455" width="192" height="160" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="b10" value="&lt;b style=&apos;font-size:14px&apos;&gt;Novel ICIR-Based&lt;br&gt;Fitness Function&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&apos;font-size:13px&apos;&gt;• 0.6×ICIR + 0.4×RankIC&lt;br&gt;• Dispersion check&lt;br&gt;• Parsimony pressure&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#999999;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=10;spacingTop=8;fontSize=13;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="232" y="455" width="190" height="160" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="b11" value="&lt;b style=&apos;font-size:14px&apos;&gt;Train / Validation Split&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&apos;font-size:13px&apos;&gt;80% fit / 20% validate — Only validated formulas survive (IC &amp;gt; 0.005) — Multi-seed evolution&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#999999;strokeWidth=1.5;verticalAlign=top;align=center;spacingLeft=10;spacingRight=10;spacingTop=8;fontSize=13;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="28" y="630" width="394" height="100" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="c5" value="&lt;b style=&apos;font-size:17px;color:#FFFFFF&apos;&gt;REGIME-AWARE SELECTION&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2B3A5C;strokeColor=#000000;strokeWidth=2.5;verticalAlign=top;align=center;spacingTop=10;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="460" y="410" width="300" height="340" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="b12" value="&lt;b style=&apos;font-size:14px&apos;&gt;GP Formula Library&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&apos;font-size:13px&apos;&gt;• Top validated formulas&lt;br&gt;• Ranked by validation ICIR&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#999999;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=10;spacingTop=8;fontSize=13;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="474" y="455" width="272" height="82" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="b13" value="&lt;b style=&apos;font-size:14px&apos;&gt;Per-Regime Evaluation&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&apos;font-size:13px&apos;&gt;• Evaluate in Bull periods&lt;br&gt;• Evaluate in Bear periods&lt;br&gt;• Select best per regime&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#999999;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=10;spacingTop=8;fontSize=13;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="474" y="550" width="272" height="100" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="b14" value="&lt;b style=&apos;font-size:13px&apos;&gt;Dynamic Switching — HMM state → activate regime formula&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#999999;strokeWidth=1.5;verticalAlign=middle;align=center;fontSize=13;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="474" y="663" width="272" height="55" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="c6" value="&lt;b style=&apos;font-size:18px;color:#FFFFFF&apos;&gt;EVALUATION &amp;amp; OUTPUT&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2B3A5C;strokeColor=#000000;strokeWidth=2.5;verticalAlign=top;align=center;spacingTop=10;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="785" y="410" width="350" height="340" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="b15" value="&lt;b style=&apos;font-size:14px&apos;&gt;Alpha Signal&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&apos;font-size:13px&apos;&gt;Cross-sectional stock ranking — Daily alpha score per stock&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#999999;strokeWidth=1.5;verticalAlign=top;align=center;spacingTop=8;fontSize=13;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="799" y="455" width="322" height="62" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="b16" value="&lt;b style=&apos;font-size:14px&apos;&gt;Long-Short Portfolio&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&apos;font-size:13px&apos;&gt;• Top/Bottom quintile&lt;br&gt;• 20-day rebalancing&lt;br&gt;• 10 bps txn cost&lt;br&gt;• Equal weighted&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#999999;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=10;spacingTop=8;fontSize=13;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="799" y="530" width="155" height="185" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="b17" value="&lt;b style=&apos;font-size:14px&apos;&gt;Performance Metrics&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b style=&apos;font-size:13px&apos;&gt;• Sharpe: 0.417&lt;br&gt;• Ann Return: 6.51%&lt;br&gt;• Rank IC: 0.037&lt;br&gt;• Rank ICIR: 0.210&lt;br&gt;• Max DD: -36.2%&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#999999;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=10;spacingTop=8;fontSize=13;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="966" y="530" width="155" height="185" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== ARROWS ===== -->
+
+        <mxCell id="a1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=3;strokeColor=#000000;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="c1" target="c2" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="a2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=3;strokeColor=#000000;endArrow=block;endFill=1;exitX=1;exitY=0.2;exitDx=0;exitDy=0;entryX=0;entryY=0.2;entryDx=0;entryDy=0;" edge="1" source="c2" target="c3" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="a3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=3;strokeColor=#000000;endArrow=block;endFill=1;exitX=0.18;exitY=1;exitDx=0;exitDy=0;entryX=0.84;entryY=0;entryDx=0;entryDy=0;" edge="1" source="c2" target="c4" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="a4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=3;strokeColor=#000000;endArrow=block;endFill=1;exitX=0.1;exitY=1;exitDx=0;exitDy=0;entryX=0.9;entryY=0;entryDx=0;entryDy=0;" edge="1" source="c3" target="c5" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="a5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=3;strokeColor=#000000;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="c4" target="c5" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="a6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=3;strokeColor=#000000;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="c5" target="c6" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
