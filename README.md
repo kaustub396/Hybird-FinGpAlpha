@@ -1,4 +1,4 @@
-# Hybird-FinGpAlpha: Regime-Aware Formulaic Alpha Discovery (NIFTY-50)
+# Hybrid-FinGpAlpha: Regime-Aware Formulaic Alpha Discovery (NIFTY-50)
 
 A hybrid quantitative finance research project combining Hidden Markov Models (HMM) and Genetic Programming (GP) to mine regime-aware formulaic alphas in the Indian stock market (NIFTY-50 constituents).
 
